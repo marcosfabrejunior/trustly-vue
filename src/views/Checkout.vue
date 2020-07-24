@@ -41,8 +41,11 @@
 						<div class="checkout__details__side__title">Select your payment method</div>
 						<payment-method
 							v-for="payment_method in itemCart.paymentMethods"
+							:key="index"
 							:payment_method="payment_method"
 						></payment-method>
+
+						<button class="checkout__details__submit">Continue</button>
 					</div>
 				</div>
 			</div>
@@ -110,6 +113,7 @@ export default class Checkout extends options {
 
 		&__side {
 			width: 50%;
+			margin-bottom:1.5rem;
 			&__title {
 				font-family: Open Sans;
 				font-style: normal;
@@ -186,6 +190,24 @@ export default class Checkout extends options {
 
 				color: #000000;
 			}
+		}
+
+		&__submit {
+			background: #6b8067;
+			border-radius: 5px;
+			font-family: Open Sans;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 14px;
+			line-height: 19px;
+			text-align: center;
+
+			color: #ffffff;
+			padding:1.2rem;
+			border: 0;
+			border-radius: 3px;
+			width:50%;
+			float: right;
 		}
 	}
 }

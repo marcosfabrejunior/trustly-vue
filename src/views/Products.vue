@@ -2,7 +2,7 @@
 	<div id="products" class="products">
 		<div class="products__container">
 			<div class="products__list">
-				<product-thumb v-for="product in products" :product="product" />
+				<product-thumb v-for="product in products" :key="index" :product="product" />
 			</div>
 		</div>
 	</div>
