@@ -36,6 +36,14 @@
 							<div class="checkout__details__total--value">${{itemCart.product.price}}</div>
 						</div>
 					</div>
+
+					<div class="checkout__details__side--full">
+						<div class="checkout__details__side__title">Select your payment method</div>
+						<payment-method
+							v-for="payment_method in itemCart.paymentMethods"
+							:payment_method="payment_method"
+						></payment-method>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -45,9 +53,12 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import ItemCart from "@/models/ItemCart";
+import PaymentMethod from "@/components/PaymentMethod.vue";
 
 const options = Vue.extend({
-	components: {},
+	components: {
+		"payment-method": PaymentMethod,
+	},
 	props: [],
 });
 
@@ -95,6 +106,7 @@ export default class Checkout extends options {
 		padding: 3rem;
 		display: flex;
 		flex-wrap: wrap;
+		align-content: stretch;
 
 		&__side {
 			width: 50%;
@@ -106,6 +118,10 @@ export default class Checkout extends options {
 				line-height: 30px;
 				margin-bottom: 1.5rem;
 				color: #000000;
+			}
+
+			&--full {
+				width: 100%;
 			}
 		}
 
