@@ -14,4 +14,6 @@ export default class ItemCart {
         this.quantity = quantity; 
         this.size = size;
     }
+
+    
 }

@@ -4,6 +4,7 @@
 			<img :src="itemCart.product.thumbnailURL" alt />
 		</div>
 		<div class="product-thumb__title">{{itemCart.product.description}}</div>
+
 		<div class="product-thumb__options">
 			<div class="product-thumb__options__item">
 				<label for>Size</label>
@@ -16,6 +17,7 @@
 				<input type="number" v-model="itemCart.quantity" />
 			</div>
 		</div>
+		<div class="product-thumb__price">$ {{itemCart.product.price}}</div>
 		<div class="product__thumb__add-to-cart">
 			<button v-on:click="addToCart(itemCart)" class="product__thumb__add-to-cart--button">Add to Cart</button>
 		</div>
@@ -40,8 +42,9 @@ export default class ProductThumb extends options {
 		this.itemCart = new ItemCart(this.product, Number(1), Number(41));
 	}
 
-	addToCart(itemCart:ItemCart){
-		
+	addToCart(itemCart: ItemCart) {
+		this.$store.state.itemCart = itemCart;
+		this.$router.push("/checkout");
 	}
 }
 </script>
@@ -125,6 +128,20 @@ export default class ProductThumb extends options {
 		margin-top: 2rem;
 
 		color: #ffffff;
+	}
+
+	&__price {
+		font-family: Open Sans;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 2.1rem;
+		line-height: 4rem;
+
+		/* or 84% */
+
+		text-align: center;
+
+		color: #000000;
 	}
 }
 </style>
