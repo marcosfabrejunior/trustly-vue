@@ -20,7 +20,7 @@ export default class Product {
             this.id = id;
             this.description = description;
             this.color = color;
-            this.price = price;
+            this.price = Number(price);
             this.currency = currency;
             this.thumbnailURL = thumbnailURL;
             this.maxresURL = maxresURL;

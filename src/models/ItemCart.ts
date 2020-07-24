@@ -16,4 +16,7 @@ export default class ItemCart {
     }
 
     
+    get totalPrice(){
+        return Number(this.quantity) * Number(this.product.price);
+    }
 }
