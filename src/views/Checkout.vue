@@ -2,7 +2,6 @@
 	<div class="checkout">
 		<breadcrumb :step="2" />
 		<div class="checkout__container">
-			
 			<div class="checkout__product">
 				<div class="checkout__product__img">
 					<img :src="itemCart.product.maxresURL" alt />

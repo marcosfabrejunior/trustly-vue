@@ -13,11 +13,9 @@ const options = Vue.extend({
 
 @Component
 export default class PayWithMyBank extends options {
-    showPayWithMyBank:Boolean = true;
+    showPayWithMyBank:Boolean = false;
 	constructor() {
 		super();
-
-		
 	}
 
 	addListener() {
