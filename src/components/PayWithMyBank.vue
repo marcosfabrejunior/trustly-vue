@@ -5,10 +5,11 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import ItemCart from '../models/ItemCart';
+import Cart from '../models/Cart';
 
 const options = Vue.extend({
 	components: {},
-	props: ["enable", "itemCart"],
+	props: ["enable", "cart"],
 });
 
 @Component
@@ -33,7 +34,7 @@ export default class PayWithMyBank extends options {
 		});
 	}
 
-	createTransaction(cart:ItemCart) {
+	createTransaction(cart:Cart) {
 		//@ts-ignore
 		window.PayWithMyBank.establish({
 			accessId: "D61EC9BAF0BB369B9438",
@@ -41,8 +42,8 @@ export default class PayWithMyBank extends options {
 			metadata: { demo: "enabled" },
 			currency: "USD",
 			paymentType: "Deferred",
-			amount: "100.00",
-			description: "your@email.here",
+			amount: cart.totalCost,
+			description: cart.client.name,
 			merchantReference: "123456",
 			returnUrl: "#success",
 			cancelUrl: "#cancel",
@@ -66,7 +67,7 @@ export default class PayWithMyBank extends options {
 
 	show(){
 		this.addListener();
-		this.createTransaction(this.itemCart);
+		this.createTransaction(this.cart);
 		this.showPayWithMyBank = true;
 	}
 

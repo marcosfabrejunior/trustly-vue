@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Products from '../views/Products.vue'
 import Checkout from '../views/Checkout.vue'
+import Review from '../views/Review.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,12 @@ Vue.use(VueRouter)
     path: '/checkout',
     name: 'Checkout',
     component: Checkout
+  },
+  {
+    path: '/review-and-confirmation',
+    name: 'Review and Confirmation',
+    component: Review
+
   },
   {
     path: '/about',

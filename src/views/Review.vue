@@ -1,16 +1,16 @@
 <template>
-	<div class="checkout">
-		<breadcrumb :step="2" />
-		<div class="checkout__container">
-			<div class="checkout__product">
-				<div class="checkout__product__img">
+	<div class="review">
+		<breadcrumb :step="3" />
+		<div class="review__container">
+			<div class="review__product">
+				<div class="review__product__img">
 					<img :src="cart.item.product.maxresURL" alt />
 				</div>
-				<div class="checkout__details">
-					<div class="checkout__details__side">
-						<div class="checkout__details__side__title">Cart Total</div>
-						<div class="checkout__details--title">{{cart.item.description}}</div>
-						<div class="checkout__details--item_details">
+				<div class="review__details">
+					<div class="review__details__side">
+						<div class="review__details__side__title">Order Summary</div>
+						<div class="review__details--title">{{cart.item.description}}</div>
+						<div class="review__details--item_details">
 							x{{cart.item.quantity}}
 							{{cart.item.product.color}}
 							Size {{cart.item.size}}
@@ -18,38 +18,31 @@
 							Item #{{cart.item.product.id}}
 						</div>
 					</div>
-					<div class="checkout__details__side">
-						<div class="checkout__details__side__title">Delivery Details</div>
-						<div class="checkout__details--item_details">
+					<div class="review__details__side">
+						<div class="review__details__side__title">Delivery Details</div>
+						<div class="review__details--item_details">
 							{{client.name}}
 							<br />Phone no: {{client.phone}}
 							<br />Adress: {{client.address}}
 							<br />
 						</div>
 
-						<div class="checkout__details__total">
-							<div class="checkout__details__total--desc">
+						<div class="review__details__side review__details__side--full">
+							<div class="review__details__total--desc">
 								Total Cost
 								<br />
 								<small>Delivery included</small>
 							</div>
-							<div class="checkout__details__total--value">${{cart.totalCost}}</div>
+							<div class="review__details__total--value">${{cart.totalCost}}</div>
+								<button v-on:click="continueToPayment();" class="review__details__submit">Continue</button>
 						</div>
 					</div>
 
-					<div class="checkout__details__side--full">
-						<div class="checkout__details__side__title">Select your payment method</div>
-						<payment-method
-							v-for="(payment_method, index) in cart.paymentMethods"
-							:payment_method="payment_method"
-						></payment-method>
-
-						<button v-on:click="continueToPayment();" class="checkout__details__submit">Continue</button>
-					</div>
+					
 				</div>
 			</div>
 		</div>
-		<pay-with-my-bank v-on:payment_success="goToReview()" :enable="enablePayWithMyBank" :cart="cart"  />
+		<pay-with-my-bank :enable="enablePayWithMyBank" :cart="cart"  />
 	</div>
 </template>
 
@@ -71,7 +64,7 @@ const options = Vue.extend({
 });
 
 @Component
-export default class Checkout extends options {
+export default class review extends options {
 	enablePayWithMyBank: Boolean = false;
 	constructor() {
 		super();
@@ -91,16 +84,14 @@ export default class Checkout extends options {
 	continueToPayment(){
 		this.enablePayWithMyBank = false;
 		this.enablePayWithMyBank = true;
-	}
 
-	goToReview(){
-		this.$router.push("/review-and-confirmation");
+
 	}
 }
 </script>
 
 <style lang="scss">
-.checkout {
+.review {
 	&__container {
 		margin: auto;
 		max-width: 1200px;

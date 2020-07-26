@@ -6,10 +6,10 @@ export default class Cart {
     client: Client;
     items: Array<ItemCart> = [];
 
-    constructor(client:Client){
+    constructor(client: Client) {
         this.client = client;
     }
-    
+
     get paymentMethods() {
         return [
             {
@@ -33,20 +33,25 @@ export default class Cart {
         ]
     }
 
-    addItem(item:ItemCart){
+    addItem(item: ItemCart) {
         this.items = [];
         this.items.push(item);
     }
 
-    get item(){
+    get item() {
         return this.items[0];
     }
 
-    get totalCost(){
-        return this.items[0].product.price;
+    get totalCost() {
+        return this.items[0].product.price.toLocaleString(
+            "en-US",
+            { minimumFractionDigits: 2 }
+        );
+
+
     }
 
-    toString(){
+    toString() {
         return JSON.stringify(this);
     }
 }
