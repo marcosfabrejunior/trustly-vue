@@ -44,12 +44,16 @@ export default class TopBar extends options {
 		return { backgroundImage: `url(${this.avatarImage})` };
 	}
 
-	back(){
-		window.history.back();
+	back() {
+		if (this.$route.name == "Checkout") {
+			return this.$router.push("/");
+		}
+
+		return this.$router.push("/checkout");
 	}
 
-	get showButtonBack(){
-		if(this.$route.name == 'Sneakers'){
+	get showButtonBack() {
+		if (this.$route.name == "Sneakers") {
 			return false;
 		}
 		return true;
@@ -106,8 +110,9 @@ export default class TopBar extends options {
 			line-height: 2.5rem;
 			border: 0px;
 			color: #000000;
-			padding: .5rem 1rem;
+			padding: 0.5rem 1rem;
 			cursor: pointer;
+			outline: none;
 		}
 	}
 }

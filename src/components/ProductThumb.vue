@@ -51,7 +51,7 @@ export default class ProductThumb extends options {
 
 <style lang="scss">
 .product-thumb {
-	margin-top: 6rem;
+	margin-bottom: 6rem;
 	margin-left: 1.5rem;
 	margin-right: 1.5rem;
 	box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.05);

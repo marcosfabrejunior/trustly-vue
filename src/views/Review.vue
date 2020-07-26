@@ -22,27 +22,30 @@
 						<div class="review__details__side__title">Delivery Details</div>
 						<div class="review__details--item_details">
 							{{client.name}}
-							<br />Phone no: {{client.phone}}
-							<br />Adress: {{client.address}}
+							<br />
+							Phone no: {{client.phone}}
+							<br />
+							Adress: {{client.address}}
 							<br />
 						</div>
-
-						<div class="review__details__side review__details__side--full">
+					</div>
+					<div class="review__details__side">
+						<div class="review__details__total">
 							<div class="review__details__total--desc">
 								Total Cost
 								<br />
 								<small>Delivery included</small>
 							</div>
 							<div class="review__details__total--value">${{cart.totalCost}}</div>
-								<button v-on:click="continueToPayment();" class="review__details__submit">Continue</button>
 						</div>
 					</div>
-
-					
+					<div class="review__details__side review__details__side--button">
+						<button v-on:click="continueToPayment();" class="review__details__submit">Place Order</button>
+					</div>
 				</div>
 			</div>
 		</div>
-		<pay-with-my-bank :enable="enablePayWithMyBank" :cart="cart"  />
+		<pay-with-my-bank :enable="enablePayWithMyBank" :cart="cart" />
 	</div>
 </template>
 
@@ -57,8 +60,8 @@ import PayWithMyBank from "@/components/PayWithMyBank.vue";
 const options = Vue.extend({
 	components: {
 		"payment-method": PaymentMethod,
-		"breadcrumb" : Breadcrumb,
-		"pay-with-my-bank":PayWithMyBank
+		breadcrumb: Breadcrumb,
+		"pay-with-my-bank": PayWithMyBank,
 	},
 	props: [],
 });
@@ -74,18 +77,16 @@ export default class review extends options {
 		return this.$store.state.itemCart;
 	}
 
-	get client(){
+	get client() {
 		return this.$store.getters.client;
 	}
-	get cart(){
+	get cart() {
 		return this.$store.getters.cart;
 	}
 
-	continueToPayment(){
+	continueToPayment() {
 		this.enablePayWithMyBank = false;
 		this.enablePayWithMyBank = true;
-
-
 	}
 }
 </script>
@@ -122,11 +123,14 @@ export default class review extends options {
 		padding: 3rem;
 		display: flex;
 		flex-wrap: wrap;
-		align-content: stretch;
+		align-content: flex-start;
+		justify-content: space-between;
+		
 
 		&__side {
-			width: 50%;
-			margin-bottom:1.5rem;
+			width: 49%;
+			margin-bottom: 5rem;
+			
 			&__title {
 				font-family: Open Sans;
 				font-style: normal;
@@ -139,6 +143,11 @@ export default class review extends options {
 
 			&--full {
 				width: 100%;
+			}
+
+			&--button{
+				display: flex;
+				align-content: flex-end !important;
 			}
 		}
 
@@ -216,11 +225,10 @@ export default class review extends options {
 			text-align: center;
 
 			color: #ffffff;
-			padding:1.2rem;
+			padding: .8rem .7rem;
 			border: 0;
 			border-radius: 3px;
-			width:50%;
-			float: right;
+			width: 100%;
 			cursor: pointer;
 		}
 	}

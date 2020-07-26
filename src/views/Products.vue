@@ -1,6 +1,7 @@
 <template>
 	<div id="products" class="products">
 		<div class="products__container">
+			<search-bar placeholder="Search for your Sneaker"></search-bar>
 			<div class="products__list">
 				<product-thumb v-for="(product, index) in products" :product="product" />
 			</div>
@@ -13,10 +14,12 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import ProductService from "@/service/ProductService";
 import Product from "../models/Product";
 import ProductThumb from "@/components/ProductThumb.vue";
+import SearchBar from "@/components/SearchBar.vue";
 
 const options = Vue.extend({
 	components: {
-		"product-thumb":ProductThumb
+		"product-thumb":ProductThumb,
+		"search-bar":SearchBar
 	},
 });
 
@@ -45,6 +48,7 @@ export default class Products extends options {
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
+		flex-wrap: wrap;
 	}
 
     &__list{
