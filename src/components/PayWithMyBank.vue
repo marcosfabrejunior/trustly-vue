@@ -1,41 +1,41 @@
 <template>
-	<div class="pay_with_my_bank"></div>
+	<div v-if="showPayWithMyBank" class="pay_with_my_bank"></div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
+import ItemCart from '../models/ItemCart';
 
 const options = Vue.extend({
 	components: {},
-	props: ["step"],
+	props: ["enable", "itemCart"],
 });
 
 @Component
 export default class PayWithMyBank extends options {
+    showPayWithMyBank:Boolean = true;
 	constructor() {
 		super();
 
-		setTimeout(() => {
-			this.addListener();
-			this.createTransaction();
-		}, 400);
+		
 	}
 
 	addListener() {
+		const _self = this;
 		//@ts-ignore
 		window.PayWithMyBank.addPanelListener(function (command, event) {
 			if (command === "event" && event.type === "new_location") {
 				if (event.data.indexOf("#success") === 0) {
-					alert("success!");
+					_self.feedback(true);
 				} else {
-					alert("cancel!");
+					_self.feedback(false);
 				}
 				return false;
 			}
 		});
 	}
 
-	createTransaction() {
+	createTransaction(cart:ItemCart) {
 		//@ts-ignore
 		window.PayWithMyBank.establish({
 			accessId: "D61EC9BAF0BB369B9438",
@@ -49,6 +49,35 @@ export default class PayWithMyBank extends options {
 			returnUrl: "#success",
 			cancelUrl: "#cancel",
 		});
+	}
+
+	feedback(status: Boolean) {
+		if (status) {
+            this.$emit("payment_success");
+            this.hide();
+		} else {
+            this.$emit("payment_cancel");
+            this.hide();
+		}
+    }
+    
+    hide(){
+		this.showPayWithMyBank = false;
+		this.enable = false;
+	}
+
+	show(){
+		this.addListener();
+		this.createTransaction(this.itemCart);
+		this.showPayWithMyBank = true;
+	}
+
+
+	@Watch('enable')
+	onPropertyChanged(value: boolean) {
+		if(value){
+			this.show();
+		}
 	}
 }
 </script>

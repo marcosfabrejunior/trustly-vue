@@ -45,12 +45,12 @@
 							:payment_method="payment_method"
 						></payment-method>
 
-						<button class="checkout__details__submit">Continue</button>
+						<button v-on:click="continueToPayment();" class="checkout__details__submit">Continue</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<pay-with-my-bank />
+		<pay-with-my-bank  />
 	</div>
 </template>
 
@@ -78,6 +78,10 @@ export default class Checkout extends options {
 
 	get itemCart() {
 		return this.$store.state.itemCart;
+	}
+
+	continueToPayment(){
+
 	}
 }
 </script>
