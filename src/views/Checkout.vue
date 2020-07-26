@@ -21,9 +21,9 @@
 					<div class="checkout__details__side">
 						<div class="checkout__details__side__title">Delivery Details</div>
 						<div class="checkout__details--item_details">
-							John Smith
-							<br />Phone no:01312428200
-							<br />Adress: Redwood City 2000
+							{{client.name}}
+							<br />Phone no: {{client.phone}}
+							<br />Adress: {{client.address}}
 							<br />
 						</div>
 
@@ -73,12 +73,16 @@ const options = Vue.extend({
 export default class Checkout extends options {
 	constructor() {
 		super();
+		
 	}
 
 	get itemCart() {
 		return this.$store.state.itemCart;
 	}
 
+	get client(){
+		return this.$store.getters.client;
+	}
 	continueToPayment(){
 
 	}
