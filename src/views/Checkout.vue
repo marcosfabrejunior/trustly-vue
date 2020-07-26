@@ -1,7 +1,8 @@
 <template>
 	<div class="checkout">
+		<breadcrumb :step="2" />
 		<div class="checkout__container">
-			<div class="breadcrumb"></div>
+			
 			<div class="checkout__product">
 				<div class="checkout__product__img">
 					<img :src="itemCart.product.maxresURL" alt />
@@ -40,8 +41,7 @@
 					<div class="checkout__details__side--full">
 						<div class="checkout__details__side__title">Select your payment method</div>
 						<payment-method
-							v-for="payment_method in itemCart.paymentMethods"
-							:key="index"
+							v-for="(payment_method, index) in itemCart.paymentMethods"
 							:payment_method="payment_method"
 						></payment-method>
 
@@ -57,10 +57,12 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import ItemCart from "@/models/ItemCart";
 import PaymentMethod from "@/components/PaymentMethod.vue";
+import Breadcrumb from "@/components/Breadcrumb.vue";
 
 const options = Vue.extend({
 	components: {
 		"payment-method": PaymentMethod,
+		"breadcrumb" : Breadcrumb
 	},
 	props: [],
 });

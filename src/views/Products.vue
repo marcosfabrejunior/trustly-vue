@@ -2,7 +2,7 @@
 	<div id="products" class="products">
 		<div class="products__container">
 			<div class="products__list">
-				<product-thumb v-for="product in products" :key="index" :product="product" />
+				<product-thumb v-for="(product, index) in products" :product="product" />
 			</div>
 		</div>
 	</div>
@@ -32,7 +32,6 @@ export default class Products extends options {
 	async getProducts() {
 		const productService = new ProductService();
 		this.products = await productService.index();
-		console.log(this.products);
 	}
 }
 </script>
