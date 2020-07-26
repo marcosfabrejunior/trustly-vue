@@ -16,12 +16,11 @@ import TopBar from "@/components/TopBar.vue";
 	},
 })
 export default class App extends Vue {
-
 	constructor(){
 		super();
-		this.$store.dispatch('get_client');
+		this.$store.dispatch('bootstrap');
 	}
-
+	
 	get client(){
 		return this.$store.getters.client;
 	}

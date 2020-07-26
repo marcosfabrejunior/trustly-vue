@@ -4,18 +4,18 @@
 		<div class="checkout__container">
 			<div class="checkout__product">
 				<div class="checkout__product__img">
-					<img :src="itemCart.product.maxresURL" alt />
+					<img :src="cart.item.product.maxresURL" alt />
 				</div>
 				<div class="checkout__details">
 					<div class="checkout__details__side">
 						<div class="checkout__details__side__title">Cart Total</div>
-						<div class="checkout__details--title">{{itemCart.product.description}}</div>
+						<div class="checkout__details--title">{{cart.item.description}}</div>
 						<div class="checkout__details--item_details">
-							x{{itemCart.quantity}}
-							{{itemCart.product.color}}
-							Size {{itemCart.size}}
+							x{{cart.item.quantity}}
+							{{cart.item.product.color}}
+							Size {{cart.item.size}}
 							<br />
-							Item #{{itemCart.product.id}}
+							Item #{{cart.item.product.id}}
 						</div>
 					</div>
 					<div class="checkout__details__side">
@@ -33,14 +33,14 @@
 								<br />
 								<small>Delivery included</small>
 							</div>
-							<div class="checkout__details__total--value">${{itemCart.product.price}}</div>
+							<div class="checkout__details__total--value">${{cart.totalCost}}</div>
 						</div>
 					</div>
 
 					<div class="checkout__details__side--full">
 						<div class="checkout__details__side__title">Select your payment method</div>
 						<payment-method
-							v-for="(payment_method, index) in itemCart.paymentMethods"
+							v-for="(payment_method, index) in cart.paymentMethods"
 							:payment_method="payment_method"
 						></payment-method>
 
@@ -56,6 +56,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import ItemCart from "@/models/ItemCart";
+import Cart from "@/models/Cart";
 import PaymentMethod from "@/components/PaymentMethod.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 import PayWithMyBank from "@/components/PayWithMyBank.vue";
@@ -73,7 +74,6 @@ const options = Vue.extend({
 export default class Checkout extends options {
 	constructor() {
 		super();
-		
 	}
 
 	get itemCart() {
@@ -82,6 +82,9 @@ export default class Checkout extends options {
 
 	get client(){
 		return this.$store.getters.client;
+	}
+	get cart(){
+		return this.$store.getters.cart;
 	}
 	continueToPayment(){
 

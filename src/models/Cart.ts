@@ -1,14 +1,15 @@
 import Product from './Product';
 import ItemCart from './ItemCart';
+import Client from './Client';
 
 export default class Cart {
-    items: Array<ItemCart>;
-    constructor(
-        items: Array<ItemCart>
-    ) {
-        this.items = items;
-    }   
+    client: Client;
+    items: Array<ItemCart> = [];
 
+    constructor(client:Client){
+        this.client = client;
+    }
+    
     get paymentMethods() {
         return [
             {
@@ -30,5 +31,22 @@ export default class Cart {
                 discountLabel: ""
             }
         ]
+    }
+
+    addItem(item:ItemCart){
+        this.items = [];
+        this.items.push(item);
+    }
+
+    get item(){
+        return this.items[0];
+    }
+
+    get totalCost(){
+        return this.items[0].product.price;
+    }
+
+    toString(){
+        return JSON.stringify(this);
     }
 }

@@ -43,7 +43,7 @@ export default class ProductThumb extends options {
 	}
 
 	addToCart(itemCart: ItemCart) {
-		this.$store.state.itemCart = itemCart;
+		this.$store.dispatch('add_to_cart', this.itemCart);
 		this.$router.push("/checkout");
 	}
 }
