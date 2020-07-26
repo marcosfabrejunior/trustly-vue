@@ -32,15 +32,28 @@ export default class SearchBar extends options {
 .searchbar{
 	width: 100%;
 	display: flex;
+	align-items: center;
 	margin-top: 3rem;
 	margin-bottom: 3rem;
+	padding-bottom: 0.5rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	border-bottom: 1px solid #BDBDBD;
+
+
+	&__icon{
+		margin-right: 1.5rem;
+	}
 
 	&__field{
 		width: 100%;
 		
 		&--input{
 			width: 100%;
-
+			height: 3rem;
+			font-size: 1.7rem;
+			border: 0;
+			outline: 0;
 		}
 	}
 }

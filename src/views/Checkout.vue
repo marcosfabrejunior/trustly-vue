@@ -22,23 +22,31 @@
 						<div class="checkout__details__side__title">Delivery Details</div>
 						<div class="checkout__details--item_details">
 							{{client.name}}
-							<br />Phone no: {{client.phone}}
-							<br />Adress: {{client.address}}
 							<br />
-						</div>
-
-						<div class="checkout__details__total">
-							<div class="checkout__details__total--desc">
-								Total Cost
-								<br />
-								<small>Delivery included</small>
-							</div>
-							<div class="checkout__details__total--value">${{cart.totalCost}}</div>
+							Phone no: {{client.phone}}
+							<br />
+							Adress: {{client.address}}
+							<br />
 						</div>
 					</div>
 
+					<div class="checkout__details__side checkout__details__side--offset"></div>
+					<div class="checkout__details__total">
+						<div class="checkout__details__total--desc">
+							Total Cost
+							<br />
+							<small>Delivery included</small>
+						</div>
+						<div class="checkout__details__total--value">${{cart.totalCost}}</div>
+					</div>
+
 					<div class="checkout__details__side--full">
-						<div class="checkout__details__side__title">Select your payment method</div>
+						<div
+							class="checkout__details__side__title checkout__details__side__title--desktop_only"
+						>Select your payment method</div>
+						<div
+							class="checkout__details__side__title checkout__details__side__title--mobile_only"
+						>Payment Method</div>
 						<payment-method
 							v-for="(payment_method, index) in cart.paymentMethods"
 							:payment_method="payment_method"
@@ -49,7 +57,7 @@
 				</div>
 			</div>
 		</div>
-		<pay-with-my-bank v-on:payment_success="goToReview()" :enable="enablePayWithMyBank" :cart="cart"  />
+		<pay-with-my-bank v-on:payment_success="goToReview()" :enable="enablePayWithMyBank" :cart="cart" />
 	</div>
 </template>
 
@@ -64,8 +72,8 @@ import PayWithMyBank from "@/components/PayWithMyBank.vue";
 const options = Vue.extend({
 	components: {
 		"payment-method": PaymentMethod,
-		"breadcrumb" : Breadcrumb,
-		"pay-with-my-bank":PayWithMyBank
+		breadcrumb: Breadcrumb,
+		"pay-with-my-bank": PayWithMyBank,
 	},
 	props: [],
 });
@@ -81,19 +89,19 @@ export default class Checkout extends options {
 		return this.$store.state.itemCart;
 	}
 
-	get client(){
+	get client() {
 		return this.$store.getters.client;
 	}
-	get cart(){
+	get cart() {
 		return this.$store.getters.cart;
 	}
 
-	continueToPayment(){
+	continueToPayment() {
 		this.enablePayWithMyBank = false;
 		this.enablePayWithMyBank = true;
 	}
 
-	goToReview(){
+	goToReview() {
 		this.$router.push("/review-and-confirmation");
 	}
 }
@@ -116,6 +124,12 @@ export default class Checkout extends options {
 		&__img {
 			margin: 1.5rem;
 			width: 40%;
+			@media (max-width: 486px) {
+				width: 30%;
+				padding: 1.5rem;
+				position: absolute;
+			}
+
 			img {
 				max-width: 100%;
 				border-radius: 1rem;
@@ -132,18 +146,46 @@ export default class Checkout extends options {
 		display: flex;
 		flex-wrap: wrap;
 		align-content: stretch;
+		@media (max-width: 486px) {
+			width: 100%;
+		}
 
 		&__side {
 			width: 50%;
-			margin-bottom:1.5rem;
+			margin-bottom: 1.5rem;
+			@media (max-width: 486px) {
+				width: 100%;
+				padding-left: 50%;
+			}
+
 			&__title {
 				font-family: Open Sans;
 				font-style: normal;
 				font-weight: normal;
-				font-size: 22px;
-				line-height: 30px;
+				font-size: 2.2rem;
+				line-height: 3rem;
 				margin-bottom: 1.5rem;
 				color: #000000;
+
+				@media (max-width: 486px) {
+					font-size: 1.6rem;
+					line-height: 1.8rem;
+					margin-bottom: 1rem;
+				}
+
+				&--desktop_only{
+					@media (max-width: 486px) {
+						display: none;
+					}
+				}
+				&--mobile_only{
+					display: none;
+					font-size: 2rem;
+					margin-bottom: 1.5rem;
+					@media (max-width: 486px) {
+						display: flex;
+					}
+				}
 			}
 
 			&--full {
@@ -155,8 +197,8 @@ export default class Checkout extends options {
 			font-family: Open Sans;
 			font-style: normal;
 			font-weight: normal;
-			font-size: 16px;
-			line-height: 20px;
+			font-size: 1.6rem;
+			line-height: 2rem;
 			/* identical to box height, or 122% */
 
 			color: #000000;
@@ -166,26 +208,37 @@ export default class Checkout extends options {
 			font-family: Open Sans;
 			font-style: normal;
 			font-weight: normal;
-			font-size: 16px;
-			line-height: 25px;
+			font-size: 1.6rem;
+			line-height: 2.5rem;
 			/* or 156% */
 
 			color: #a5a5a5;
+
+			@media (max-width: 486px) {
+				font-size: 1.4rem;
+				line-height: 1.8rem;
+			}
 		}
 
 		&__total {
 			display: flex;
-			width: 100%;
+			width: 50%;
+			align-self: flex-end;
 			justify-content: space-between;
 			align-items: center;
 			margin-top: 1.5rem;
+
+			@media (max-width: 486px) {
+				width: 100%;
+				margin-bottom: 3rem;
+			}
 
 			&--desc {
 				font-family: Open Sans;
 				font-style: normal;
 				font-weight: normal;
-				font-size: 16px;
-				line-height: 20px;
+				font-size: 1.6rem;
+				line-height: 2rem;
 				/* identical to box height, or 122% */
 
 				color: #000000;
@@ -194,8 +247,8 @@ export default class Checkout extends options {
 					font-family: Open Sans;
 					font-style: normal;
 					font-weight: normal;
-					font-size: 16px;
-					line-height: 20px;
+					font-size: 1.6rem;
+					line-height: 2rem;
 					/* identical to box height, or 122% */
 
 					color: #a5a5a5;
@@ -220,17 +273,23 @@ export default class Checkout extends options {
 			font-family: Open Sans;
 			font-style: normal;
 			font-weight: bold;
-			font-size: 14px;
-			line-height: 19px;
+			font-size: 1.4rem;
+			line-height: 1.9rem;
 			text-align: center;
 
 			color: #ffffff;
-			padding:1.2rem;
+			padding: 1.2rem;
 			border: 0;
 			border-radius: 3px;
-			width:50%;
+			width: 50%;
 			float: right;
 			cursor: pointer;
+
+			@media (max-width: 486px) {
+				width: 100%;
+				font-size: 2rem;
+				line-height: 3rem;
+			}
 		}
 	}
 }

@@ -32,9 +32,26 @@ html,
 body {
 	font-size: 10px;
 	margin: 0;
+
+	@media (max-width: 486px){
+		font-size: 8px;
+	}
+
+	@media (max-width:768px){
+		font-size: 7px;
+	}
+
+	@media (max-width:986px){
+		font-size: 8px;
+	}
 }
+
+
 
 .offset-top{
 	height: 8.7rem;
+	@media (max-width:486px){
+		display: none;
+	}
 }
 </style>
