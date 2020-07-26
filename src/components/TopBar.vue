@@ -36,6 +36,7 @@ export default class TopBar extends options {
 	margin: 0;
 	display: flex;
 	align-content: stretch;
+	z-index: 2;
 
 	background: #f1f1f1;
 

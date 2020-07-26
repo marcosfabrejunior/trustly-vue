@@ -1,7 +1,13 @@
 <template>
-	<div class="breadcrumb"> 
+	<div class="breadcrumb">
 		<div class="breadcrumb__container">
-			<div v-for="(b_step, index) in steps" class="breadcrumb__step" :class="{'breadcrumb__step--active':b_step.active}"></div>
+			<div
+				v-for="(b_step, index) in steps"
+				class="breadcrumb__step"
+				:class="{'breadcrumb__step--active':b_step.active}"
+			>
+				<div class="breadcrumb__step__name" :class="{'breadcrumb__step__name--active':b_step.active}">{{b_step.name}}</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -17,8 +23,6 @@ const options = Vue.extend({
 
 @Component
 export default class Breadcrumb extends options {
-
-	
 	get steps() {
 		return [
 			{
@@ -50,8 +54,17 @@ export default class Breadcrumb extends options {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		width: 100%;
-		margin-top: 3rem;	
+		width: 70%;
+		margin-top: 3rem;
+		position: relative;
+
+		&::before {
+			content: "";
+			width: 100%;
+			position: absolute;
+			height: 0.1rem;
+			background: #e8e8e8;
+		}
 	}
 
 	&__step {
@@ -59,9 +72,31 @@ export default class Breadcrumb extends options {
 		height: 1.5rem;
 		border-radius: 3rem;
 		background: #e8e8e8;
+		position: relative;
+		display: flex;
+		justify-content: center;
 
-		&--active{
+		&--active {
+			background: #61cb46;
+		}
 
+		&__name {
+			font-family: Arial;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 1.6rem;
+			line-height: 1.8rem;
+			text-align: center;
+			top: 100%;
+			left: 100%;
+			right: 100%;
+			white-space: nowrap;
+			padding-top: 2rem;
+			color: #BEBEBE;
+
+			&--active{
+				color: #000000 !important;
+			}
 		}
 	}
 }

@@ -50,6 +50,7 @@
 				</div>
 			</div>
 		</div>
+		<pay-with-my-bank />
 	</div>
 </template>
 
@@ -58,11 +59,13 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import ItemCart from "@/models/ItemCart";
 import PaymentMethod from "@/components/PaymentMethod.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
+import PayWithMyBank from "@/components/PayWithMyBank.vue";
 
 const options = Vue.extend({
 	components: {
 		"payment-method": PaymentMethod,
-		"breadcrumb" : Breadcrumb
+		"breadcrumb" : Breadcrumb,
+		"pay-with-my-bank":PayWithMyBank
 	},
 	props: [],
 });
