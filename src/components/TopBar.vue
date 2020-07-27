@@ -78,6 +78,8 @@ export default class TopBar extends options {
 		height: 5rem;
 		position: relative;
 		padding-left: 1rem;
+		padding-right: 1rem;;
+		width: auto;
 	}
 
 	&__title {
@@ -98,9 +100,7 @@ export default class TopBar extends options {
 		height: 3.521rem;
 		background-size: cover;
 		border-radius: 200px;
-		@media (max-width: 486px) {
-			display: none;
-		}
+		
 	}
 
 	&__container {
@@ -119,7 +119,7 @@ export default class TopBar extends options {
 			font-family: Arial;
 			font-style: normal;
 			font-weight: normal;
-			font-size: 2.17514rem;
+			font-size: 1.9rem;
 			line-height: 2.5rem;
 			border: 0px;
 			color: #000000;
@@ -134,9 +134,9 @@ export default class TopBar extends options {
 			}
 
 			svg {
+					margin-right: 0.4rem;
 				@media (max-width: 486px) {
 					transform: scale(0.8);
-					margin-right: 0.4rem;
 				}
 			}
 		}

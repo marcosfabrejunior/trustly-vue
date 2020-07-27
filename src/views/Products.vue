@@ -56,6 +56,9 @@ export default class Products extends options {
         justify-content: space-between;
         align-content: stretch;
         flex-wrap: wrap;
+		@media (max-width: 486px) {
+			justify-content: center;
+		}
     }
 }
 </style>

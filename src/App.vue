@@ -35,6 +35,7 @@ body {
 
 	@media (max-width: 486px){
 		font-size: 8px;
+		overflow-x: hidden;
 	}
 
 	@media (max-width:768px){
