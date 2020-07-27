@@ -71,7 +71,7 @@ const options = Vue.extend({
 		"payment-method": PaymentMethod,
 		breadcrumb: Breadcrumb,
 		"pay-with-my-bank": PayWithMyBank,
-	},
+	}, 
 	props: [],
 });
 
