@@ -8,9 +8,15 @@
 				/>
 			</svg>
 		</div>
-		<div
-			class="searchbar__field"
-		><input :placeholder="placeholder" type="text" class="searchbar__field--input" v-model="term" v-on:input="$emit('search_string', term)"></div>
+		<div class="searchbar__field">
+			<input
+				:placeholder="placeholder"
+				type="text"
+				class="searchbar__field--input"
+				v-model="term"
+				v-on:input="$emit('search_string', term)"
+			/>
+		</div>
 	</div>
 </template>
 
@@ -29,7 +35,7 @@ export default class SearchBar extends options {
 </script>
 
 <style lang="scss">
-.searchbar{
+.searchbar {
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -38,17 +44,21 @@ export default class SearchBar extends options {
 	padding-bottom: 0.5rem;
 	padding-left: 1.5rem;
 	padding-right: 1.5rem;
-	border-bottom: 1px solid #BDBDBD;
+	border-bottom: 1px solid #bdbdbd;
 
+	@media (max-width: 486px) {
+		margin-left: 2rem;
+		margin-right: 2rem;
+	}
 
-	&__icon{
+	&__icon {
 		margin-right: 1.5rem;
 	}
 
-	&__field{
+	&__field {
 		width: 100%;
-		
-		&--input{
+
+		&--input {
 			width: 100%;
 			height: 3rem;
 			font-size: 1.7rem;
